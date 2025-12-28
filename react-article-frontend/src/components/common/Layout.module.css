@@ -1,0 +1,17 @@
+.layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.main {
+  flex: 1;
+  padding: var(--spacing-xl) 0;
+}
+
+/* Ensure proper spacing on mobile */
+@media (max-width: 767px) {
+  .main {
+    padding: var(--spacing-lg) 0;
+  }
+}

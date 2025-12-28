@@ -1,0 +1,76 @@
+{
+  "name": "article-enhancement-automation",
+  "version": "1.0.0",
+  "description": "Node.js automation system that fetches articles from Laravel API, enhances them using AI and web research, and publishes improved versions back to the API",
+  "type": "module",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "node --watch src/index.js",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "test-components": "node src/index.js --test",
+    "lint": "eslint src/**/*.js",
+    "lint:fix": "eslint src/**/*.js --fix",
+    "format": "prettier --write src/**/*.js",
+    "batch": "node src/index.js --batch",
+    "enhance-only": "node src/index.js --skip-publishing",
+    "seo-enhance": "node src/index.js --enhancement-type seo",
+    "structure-enhance": "node src/index.js --enhancement-type structure"
+  },
+  "keywords": [
+    "article-enhancement",
+    "ai-automation",
+    "content-scraping",
+    "groq-api",
+    "laravel-integration",
+    "google-search"
+  ],
+  "author": "Article Enhancement Automation",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.6.2",
+    "cheerio": "^1.0.0-rc.12",
+    "puppeteer": "^21.6.1",
+    "google-it": "^1.6.4",
+    "dotenv": "^16.3.1"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "fast-check": "^3.15.0",
+    "eslint": "^8.56.0",
+    "prettier": "^3.1.1",
+    "@jest/globals": "^29.7.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "transform": {},
+    "extensionsToTreatAsEsm": [".js"],
+    "globals": {
+      "jest": {
+        "useESM": true
+      }
+    },
+    "testMatch": [
+      "**/tests/**/*.test.js",
+      "**/src/**/*.test.js"
+    ],
+    "collectCoverageFrom": [
+      "src/**/*.js",
+      "!src/**/*.test.js",
+      "!src/index.js"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 85,
+        "functions": 85,
+        "lines": 85,
+        "statements": 85
+      }
+    }
+  }
+}

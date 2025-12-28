@@ -1,0 +1,114 @@
+.articleNav {
+  margin-bottom: var(--spacing-xl);
+}
+
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  color: var(--color-text-secondary);
+  font-weight: var(--font-weight-medium);
+  transition: color var(--transition-fast);
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--radius-md);
+}
+
+.backLink:hover {
+  color: var(--color-primary);
+  background-color: var(--color-bg-secondary);
+  text-decoration: none;
+}
+
+.articleDetail {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Placeholder styles */
+.placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-3xl);
+  text-align: center;
+  background-color: var(--color-bg-secondary);
+  border-radius: var(--radius-xl);
+  border: 2px dashed var(--color-border-medium);
+  min-height: 400px;
+}
+
+.placeholderIcon {
+  font-size: 4rem;
+  margin-bottom: var(--spacing-lg);
+}
+
+.placeholderTitle {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-md);
+}
+
+.placeholderText {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-lg);
+  line-height: var(--line-height-relaxed);
+  max-width: 500px;
+  margin: 0 0 var(--spacing-xl);
+}
+
+.placeholderActions {
+  display: flex;
+  gap: var(--spacing-md);
+  justify-content: center;
+}
+
+.placeholderButton {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--spacing-md) var(--spacing-xl);
+  background-color: var(--color-primary);
+  color: var(--color-text-inverse);
+  border-radius: var(--radius-md);
+  font-weight: var(--font-weight-medium);
+  text-decoration: none;
+  transition: all var(--transition-fast);
+}
+
+.placeholderButton:hover {
+  background-color: var(--color-primary-hover);
+  text-decoration: none;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+/* Mobile Responsive */
+@media (max-width: 767px) {
+  .articleNav {
+    margin-bottom: var(--spacing-lg);
+  }
+  
+  .backLink {
+    font-size: var(--font-size-sm);
+  }
+  
+  .placeholder {
+    padding: var(--spacing-2xl);
+    min-height: 300px;
+  }
+  
+  .placeholderTitle {
+    font-size: var(--font-size-xl);
+  }
+  
+  .placeholderText {
+    font-size: var(--font-size-base);
+  }
+  
+  .placeholderButton {
+    width: 100%;
+    max-width: 280px;
+    justify-content: center;
+  }
+}

@@ -1,0 +1,80 @@
+version: '3.8'
+
+services:
+  # Laravel API Backend
+  laravel-api:
+    build:
+      context: ./blog-article-scraper
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      - APP_ENV=local
+      - APP_DEBUG=true
+      - DB_CONNECTION=pgsql
+      - DB_HOST=${DB_HOST}
+      - DB_PORT=${DB_PORT}
+      - DB_DATABASE=${DB_DATABASE}
+      - DB_USERNAME=${DB_USERNAME}
+      - DB_PASSWORD=${DB_PASSWORD}
+    volumes:
+      - ./blog-article-scraper:/var/www/html
+    depends_on:
+      - postgres
+    networks:
+      - app-network
+
+  # PostgreSQL Database (for local development)
+  postgres:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: ${DB_DATABASE:-beyondchats_articles}
+      POSTGRES_USER: ${DB_USERNAME:-postgres}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-password}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - app-network
+
+  # Node.js Enhancement Service
+  enhancement-service:
+    build:
+      context: ./article-enhancement-automation
+      dockerfile: Dockerfile
+    environment:
+      - LARAVEL_API_BASE_URL=http://laravel-api:8000/api
+      - GROQ_API_KEY=${GROQ_API_KEY}
+      - GROQ_MODEL=${GROQ_MODEL:-llama-3.1-70b-versatile}
+      - LOG_LEVEL=${LOG_LEVEL:-info}
+    volumes:
+      - ./article-enhancement-automation:/app
+    depends_on:
+      - laravel-api
+    networks:
+      - app-network
+
+  # React Frontend (for development)
+  react-frontend:
+    build:
+      context: ./react-article-frontend
+      dockerfile: Dockerfile.dev
+    ports:
+      - "5173:5173"
+    environment:
+      - VITE_API_BASE_URL=http://localhost:8000/api
+    volumes:
+      - ./react-article-frontend:/app
+      - /app/node_modules
+    depends_on:
+      - laravel-api
+    networks:
+      - app-network
+
+volumes:
+  postgres_data:
+
+networks:
+  app-network:
+    driver: bridge
